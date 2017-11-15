@@ -13,10 +13,12 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import me.jordan.enzymelab.components.SubstrateComponent;
 import me.jordan.enzymelab.images.Images;
 import me.jordan.enzymelab.utils.Utils;
 
@@ -28,6 +30,13 @@ public class EnzymeFrame extends JFrame{
 	private JPanel dragPane;
 	private Point initialClick;
 	private JScrollPane pane;
+	private SubstrateComponent firstComponent;
+	private SubstrateComponent secondComponent;
+	private SubstrateComponent thirdComponent;
+	private SubstrateComponent fourthComponent;
+	private SubstrateComponent fifthComponent;
+	private JLayeredPane layer;
+	private JButton image;
 	
 	public EnzymeFrame(){
 		initComponents();
@@ -35,12 +44,32 @@ public class EnzymeFrame extends JFrame{
 	
 	@Override
 	public void paint(Graphics g){
-		g.drawImage(Images.baseImage, 0, 0, null);
+		//g.drawImage(Images.baseImage, 0, 0, null);
+		image.repaint();
 		closeButton.repaint();
+		firstComponent.repaint();
 		pane.repaint();
 	}
 	
 	public void initComponents(){
+		
+		image = new JButton();
+		image.setSize(1010, 710);
+		image.setIcon(new ImageIcon(Images.baseImage));
+		image.setLocation(0, 0);
+		image.setBorderPainted(false);
+		image.setContentAreaFilled(false);
+		image.setFocusPainted(false);
+		
+		layer = new JLayeredPane();
+		layer.setSize(1010, 710);
+		layer.setLayout(null);
+		
+		firstComponent = new SubstrateComponent(this, "first", Utils.getImage("firstSubstrate.png"), 483, 517);
+		secondComponent = new SubstrateComponent(this, "second", Utils.getImage("secondSubstrate.png"), 567, 517);
+		thirdComponent = new SubstrateComponent(this, "third", Utils.getImage("thirdSubstrate.png"), 645, 517);
+		fourthComponent = new SubstrateComponent(this, "fourth", Utils.getImage("fourthSubstrate.png"), 721, 517);
+		fifthComponent = new SubstrateComponent(this, "fifth", Utils.getImage("fifthSubstrate.png"), 792, 517);
 		
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
@@ -63,25 +92,28 @@ public class EnzymeFrame extends JFrame{
 		
 		dragPane = new JPanel();
 		dragPane.setSize(950, 50);
-		dragPane.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                initialClick = e.getPoint();
-                getComponentAt(initialClick);
-            }
-        });
+		
+	    dragPane.addMouseListener(new MouseAdapter() {
+	        public void mousePressed(MouseEvent e) {
+	            initialClick = e.getPoint();
+	            getComponentAt(initialClick);
+	        }
+	    });
 
-		dragPane.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int thisX = getLocation().x;
-                int thisY = getLocation().y;
-                int xMoved = (thisX + e.getX()) - (thisX + initialClick.x);
-                int yMoved = (thisY + e.getY()) - (thisY + initialClick.y);
-                int X = thisX + xMoved;
-                int Y = thisY + yMoved;
-                setLocation(X, Y);
-            }
-        });
+	    dragPane.addMouseMotionListener(new MouseMotionAdapter() {
+	        @Override
+	        public void mouseDragged(MouseEvent e) {
+	            int thisX = getLocation().x;
+	            int thisY = getLocation().y;
+
+	            int xMoved = (thisX + e.getX()) - (thisX + initialClick.x);
+	            int yMoved = (thisY + e.getY()) - (thisY + initialClick.y);
+
+	            int X = thisX + xMoved;
+	            int Y = thisY + yMoved;
+	            setLocation(X, Y);
+	        }
+	    });
 		
 		closeButton = new JButton();
 		closeButton.setVisible(true);
@@ -103,9 +135,18 @@ public class EnzymeFrame extends JFrame{
 			}
 			
 		});
-		add(dragPane);
-		add(closeButton);
-		add(pane);
+		dragPane.setOpaque(false);
+		dragPane.setLayout(null);
+		layer.add(dragPane, 2);
+		layer.add(closeButton, 2);
+		layer.add(pane, 2);
+		layer.add(firstComponent, 1);
+		layer.add(secondComponent, 1);
+		layer.add(thirdComponent, 1);
+		layer.add(fourthComponent, 1);
+		layer.add(fifthComponent, 1);
+		layer.add(image, 20);
+		add(layer);
 	}
 	
 }
