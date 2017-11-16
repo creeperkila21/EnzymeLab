@@ -1,5 +1,6 @@
 package me.jordan.enzymelab.components;
 
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -29,6 +30,7 @@ public class SubstrateComponent extends JButton {
 	public SubstrateComponent(EnzymeFrame frame, String name, BufferedImage image, int x, int y) {
 		currentX = x;
 		currentY = y;
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		this.setOpaque(false);
 		setLocation(x, y);
 		this.comp = this;
@@ -60,6 +62,7 @@ public class SubstrateComponent extends JButton {
 				if(setBack){
 					comp.setLocation(currentX, currentY);
 				}
+				comp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
 			@Override
@@ -79,7 +82,7 @@ public class SubstrateComponent extends JButton {
 				int deltaY = e.getYOnScreen() - screenY;
 
 				setLocation(myX + deltaX, myY + deltaY);
-				//frame.repaint();
+				comp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 
 			@Override

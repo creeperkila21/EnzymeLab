@@ -12,7 +12,7 @@ import me.jordan.enzymelab.answers.Answers;
 public class Tube {
 
 	private int phLevel;
-	private int amountOfSubstrate;
+	private double amountOfSubstrate;
 	
 	public Tube(){
 		
@@ -22,7 +22,7 @@ public class Tube {
 		return phLevel;
 	}
 	
-	public int getamountOfSubstrate(){
+	public double getamountOfSubstrate(){
 		return amountOfSubstrate;
 	}
 	
@@ -36,6 +36,10 @@ public class Tube {
 		}else{
 			return Answers.get4Answer(EnzymeLab.currentTemperature, phLevel);
 		}
+	}
+	
+	public void setAmountOfSubstrate(double sub){
+		this.amountOfSubstrate = sub;
 	}
 	
 }

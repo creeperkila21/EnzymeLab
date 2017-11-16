@@ -1,6 +1,7 @@
 package me.jordan.enzymelab.frame;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -16,8 +17,11 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import javax.swing.SpinnerNumberModel;
 
+import me.jordan.enzymelab.components.PhSelector;
 import me.jordan.enzymelab.components.SubstrateComponent;
 import me.jordan.enzymelab.images.Images;
 import me.jordan.enzymelab.utils.Utils;
@@ -37,6 +41,12 @@ public class EnzymeFrame extends JFrame{
 	private SubstrateComponent fifthComponent;
 	private JLayeredPane layer;
 	private JButton image;
+	private PhSelector firstSel;
+	private PhSelector secondSel;
+	private PhSelector thirdSel;
+	private PhSelector fourthSel;
+	private PhSelector fifthSel;
+	private JSpinner temp;
 	
 	public EnzymeFrame(){
 		initComponents();
@@ -52,6 +62,16 @@ public class EnzymeFrame extends JFrame{
 	}
 	
 	public void initComponents(){
+		
+		temp = new JSpinner(new SpinnerNumberModel(37, 1, 100, 1));
+		temp.setLocation(783, 476);
+		temp.setSize(38, 25);
+		
+		firstSel = new PhSelector(530, 481, false);
+		secondSel = new PhSelector(581, 481, false);
+		thirdSel = new PhSelector(628, 481, false);
+		fourthSel = new PhSelector(677, 481, true);
+		fifthSel = new PhSelector(727, 481, false);
 		
 		image = new JButton();
 		image.setSize(1010, 710);
@@ -92,6 +112,7 @@ public class EnzymeFrame extends JFrame{
 		
 		dragPane = new JPanel();
 		dragPane.setSize(950, 50);
+		dragPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	    dragPane.addMouseListener(new MouseAdapter() {
 	        public void mousePressed(MouseEvent e) {
@@ -126,6 +147,7 @@ public class EnzymeFrame extends JFrame{
 		closeButton.setBorderPainted(false);
 		closeButton.setFocusPainted(false);
 		closeButton.setLocation(970, 10);
+		closeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		closeButton.paintComponents(getGraphics());
 		closeButton.addActionListener(new ActionListener(){
 
@@ -145,6 +167,12 @@ public class EnzymeFrame extends JFrame{
 		layer.add(thirdComponent, 1);
 		layer.add(fourthComponent, 1);
 		layer.add(fifthComponent, 1);
+		layer.add(firstSel, 1);
+		layer.add(secondSel, 1);
+		layer.add(thirdSel, 1);
+		layer.add(fourthSel, 1);
+		layer.add(fifthSel, 1);
+		layer.add(temp, 1);
 		layer.add(image, 20);
 		add(layer);
 	}
