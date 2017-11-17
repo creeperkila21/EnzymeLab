@@ -7,8 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
+/**
+ * Jordan Cole
+ * Nov 16, 2017
+ * Period 2
+ */
+
 @SuppressWarnings("rawtypes")
-public class PhSelector extends JComboBox{
+public class TempSelector extends JComboBox{
 
 	/**
 	 * 
@@ -16,8 +22,8 @@ public class PhSelector extends JComboBox{
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unchecked") //15 29 37 46 58
-	public PhSelector(int x, int y, boolean isLess){
-		super(new String[] {"pH 7"});
+	public TempSelector(int x, int y, boolean isLess){
+		super(new String[] {"15C", "29C", "37C", "46C", "58C"});
 		this.setLocation(x, y);
 		this.setBorder(null);
 		

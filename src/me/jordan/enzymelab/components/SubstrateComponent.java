@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import me.jordan.enzymelab.EnzymeLab;
 import me.jordan.enzymelab.frame.EnzymeFrame;
+import me.jordan.enzymelab.tube.Tube;
 
 public class SubstrateComponent extends JButton {
 
@@ -26,8 +28,10 @@ public class SubstrateComponent extends JButton {
 	private boolean setBack = true;
 	private SubstrateComponent comp;
 	private EnzymeFrame frame;
+	private double amount;
 
-	public SubstrateComponent(EnzymeFrame frame, String name, BufferedImage image, int x, int y) {
+	public SubstrateComponent(EnzymeFrame frame, String name, BufferedImage image, int x, int y, double amount) {
+		this.setAmount(amount);
 		currentX = x;
 		currentY = y;
 		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -62,6 +66,7 @@ public class SubstrateComponent extends JButton {
 				if(setBack){
 					comp.setLocation(currentX, currentY);
 				}
+				
 				comp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
 
@@ -82,7 +87,28 @@ public class SubstrateComponent extends JButton {
 				int deltaY = e.getYOnScreen() - screenY;
 
 				setLocation(myX + deltaX, myY + deltaY);
-				comp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				
+				int x = (int)frame.getMousePosition().getX();
+				int y = (int)frame.getMousePosition().getY();
+				
+				boolean contains = false;
+				Tube tube = null;
+				
+				for(Tube t : EnzymeLab.allTubes){
+					if(contains) continue;
+					if(t.getamountOfSubstrate() != 0) continue;
+					if(t.contains(x, y)){
+						tube = t;
+						contains = true;
+					}
+				}
+				
+				if(contains){
+					System.out.println(tube.getName());
+					comp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				}else{
+					comp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
 			}
 
 			@Override
@@ -103,6 +129,14 @@ public class SubstrateComponent extends JButton {
 	
 	public BufferedImage getImage() {
 		return image;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 }

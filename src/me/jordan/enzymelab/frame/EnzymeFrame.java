@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 
@@ -17,12 +18,11 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTextArea;
-import javax.swing.SpinnerNumberModel;
 
 import me.jordan.enzymelab.components.PhSelector;
 import me.jordan.enzymelab.components.SubstrateComponent;
+import me.jordan.enzymelab.components.TempSelector;
 import me.jordan.enzymelab.images.Images;
 import me.jordan.enzymelab.utils.Utils;
 
@@ -41,12 +41,12 @@ public class EnzymeFrame extends JFrame{
 	private SubstrateComponent fifthComponent;
 	private JLayeredPane layer;
 	private JButton image;
-	private PhSelector firstSel;
-	private PhSelector secondSel;
-	private PhSelector thirdSel;
-	private PhSelector fourthSel;
-	private PhSelector fifthSel;
-	private JSpinner temp;
+	private TempSelector firstSel;
+	private TempSelector secondSel;
+	private TempSelector thirdSel;
+	private TempSelector fourthSel;
+	private TempSelector fifthSel;
+	private PhSelector phValue;
 	
 	public EnzymeFrame(){
 		initComponents();
@@ -54,7 +54,6 @@ public class EnzymeFrame extends JFrame{
 	
 	@Override
 	public void paint(Graphics g){
-		//g.drawImage(Images.baseImage, 0, 0, null);
 		image.repaint();
 		closeButton.repaint();
 		firstComponent.repaint();
@@ -63,15 +62,15 @@ public class EnzymeFrame extends JFrame{
 	
 	public void initComponents(){
 		
-		temp = new JSpinner(new SpinnerNumberModel(37, 1, 100, 1));
-		temp.setLocation(783, 476);
-		temp.setSize(38, 25);
+		phValue = new PhSelector(783, 476, false);
+		phValue.setLocation(783, 476);
+		phValue.setSize(38, 25);
 		
-		firstSel = new PhSelector(530, 481, false);
-		secondSel = new PhSelector(581, 481, false);
-		thirdSel = new PhSelector(628, 481, false);
-		fourthSel = new PhSelector(677, 481, true);
-		fifthSel = new PhSelector(727, 481, false);
+		firstSel = new TempSelector(530, 481, false);
+		secondSel = new TempSelector(581, 481, false);
+		thirdSel = new TempSelector(628, 481, false);
+		fourthSel = new TempSelector(677, 481, true);
+		fifthSel = new TempSelector(727, 481, false);
 		
 		image = new JButton();
 		image.setSize(1010, 710);
@@ -80,16 +79,48 @@ public class EnzymeFrame extends JFrame{
 		image.setBorderPainted(false);
 		image.setContentAreaFilled(false);
 		image.setFocusPainted(false);
+		image.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(e.getX() + " : " + e.getY());
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		layer = new JLayeredPane();
 		layer.setSize(1010, 710);
 		layer.setLayout(null);
 		
-		firstComponent = new SubstrateComponent(this, "first", Utils.getImage("firstSubstrate.png"), 483, 517);
-		secondComponent = new SubstrateComponent(this, "second", Utils.getImage("secondSubstrate.png"), 567, 517);
-		thirdComponent = new SubstrateComponent(this, "third", Utils.getImage("thirdSubstrate.png"), 645, 517);
-		fourthComponent = new SubstrateComponent(this, "fourth", Utils.getImage("fourthSubstrate.png"), 721, 517);
-		fifthComponent = new SubstrateComponent(this, "fifth", Utils.getImage("fifthSubstrate.png"), 792, 517);
+		firstComponent = new SubstrateComponent(this, "first", Utils.getImage("firstSubstrate.png"), 483, 517, 0.5);
+		secondComponent = new SubstrateComponent(this, "second", Utils.getImage("secondSubstrate.png"), 567, 517, 1.0);
+		thirdComponent = new SubstrateComponent(this, "third", Utils.getImage("thirdSubstrate.png"), 645, 517, 2.0);
+		fourthComponent = new SubstrateComponent(this, "fourth", Utils.getImage("fourthSubstrate.png"), 721, 517, 4.0);
+		fifthComponent = new SubstrateComponent(this, "fifth", Utils.getImage("fifthSubstrate.png"), 792, 517, 8.0);
 		
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
@@ -172,7 +203,7 @@ public class EnzymeFrame extends JFrame{
 		layer.add(thirdSel, 1);
 		layer.add(fourthSel, 1);
 		layer.add(fifthSel, 1);
-		layer.add(temp, 1);
+		layer.add(phValue, 2);
 		layer.add(image, 20);
 		add(layer);
 	}
