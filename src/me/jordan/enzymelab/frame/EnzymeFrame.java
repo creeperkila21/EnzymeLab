@@ -101,6 +101,8 @@ public class EnzymeFrame extends JFrame {
 		
 		calculateButton = new JButton();
 		calculateButton.setIcon(new ImageIcon(Utils.getImage("Computer.png")));
+		calculateButton.setRolloverEnabled(true);
+		calculateButton.setRolloverIcon(new ImageIcon(Utils.getImage("ComputerHover.png")));
 		calculateButton.addMouseListener(new MouseListener(){
 
 			@Override
