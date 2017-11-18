@@ -47,7 +47,6 @@ public class EnzymeLab {
 		frame.setVisible(true);
 		
 		if(OS.indexOf("mac") != -1){
-		    System.setProperty("me.jordan.enzymelab.apple.menu.about.name", "Enzyme Lab");
 		    setImage(Utils.getImage("logo.png"));
 		}
 	}
