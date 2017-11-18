@@ -37,7 +37,6 @@ public class Tube {
 	}
 	
 	public void reset(){
-		temperature = -1;
 		amountOfSubstrate = 0;
 	}
 	
