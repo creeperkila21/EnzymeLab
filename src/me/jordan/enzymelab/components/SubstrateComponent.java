@@ -29,6 +29,7 @@ public class SubstrateComponent extends JButton {
 	private SubstrateComponent comp;
 	private EnzymeFrame frame;
 	private double amount;
+	private Tube selectedTube;
 
 	public SubstrateComponent(EnzymeFrame frame, String name, BufferedImage image, int x, int y, double amount) {
 		this.setAmount(amount);
@@ -67,7 +68,14 @@ public class SubstrateComponent extends JButton {
 					comp.setLocation(currentX, currentY);
 				}
 				
-				comp.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				if(selectedTube != null){
+					selectedTube.setAmountOfSubstrate(amount);
+					selectedTube.init(frame);
+				}
+				
+				
+				
+				comp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 			}
 
 			@Override
@@ -96,15 +104,16 @@ public class SubstrateComponent extends JButton {
 				
 				for(Tube t : EnzymeLab.allTubes){
 					if(contains) continue;
-					if(t.getamountOfSubstrate() != 0) continue;
+					if(t.getAmountOfSubstrate() != 0) continue;
 					if(t.contains(x, y)){
 						tube = t;
 						contains = true;
 					}
 				}
 				
+				selectedTube = tube;
+				
 				if(contains){
-					System.out.println(tube.getName());
 					comp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				}else{
 					comp.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
