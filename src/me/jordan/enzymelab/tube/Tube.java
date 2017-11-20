@@ -77,7 +77,7 @@ public class Tube {
 		}
 		updateTable();
 		frame.getToRemove().add(label);
-		frame.getLayer().add(label, 2);
+		frame.getLayer().add(label, 1);
 	}
 	
 	public void updateTable(){

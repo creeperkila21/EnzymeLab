@@ -170,10 +170,10 @@ public class EnzymeFrame extends JFrame {
 						EnzymeLab.tube1.setTemperature(29);
 					}else if(text.equalsIgnoreCase("37C")){
 						EnzymeLab.tube1.setTemperature(37);
-					}else if(text.equalsIgnoreCase("45C")){
-						EnzymeLab.tube1.setTemperature(45);
-					}else if(text.equalsIgnoreCase("59C")){
-						EnzymeLab.tube1.setTemperature(59);
+					}else if(text.equalsIgnoreCase("46C")){
+						EnzymeLab.tube1.setTemperature(46);
+					}else if(text.equalsIgnoreCase("58C")){
+						EnzymeLab.tube1.setTemperature(58);
 					}
 				}
 			}
@@ -196,10 +196,10 @@ public class EnzymeFrame extends JFrame {
 						EnzymeLab.tube2.setTemperature(29);
 					}else if(text.equalsIgnoreCase("37C")){
 						EnzymeLab.tube2.setTemperature(37);
-					}else if(text.equalsIgnoreCase("45C")){
-						EnzymeLab.tube2.setTemperature(45);
-					}else if(text.equalsIgnoreCase("59C")){
-						EnzymeLab.tube2.setTemperature(59);
+					}else if(text.equalsIgnoreCase("46C")){
+						EnzymeLab.tube2.setTemperature(46);
+					}else if(text.equalsIgnoreCase("58C")){
+						EnzymeLab.tube2.setTemperature(58);
 					}
 				}
 			}
@@ -221,10 +221,10 @@ public class EnzymeFrame extends JFrame {
 						EnzymeLab.tube3.setTemperature(29);
 					}else if(text.equalsIgnoreCase("37C")){
 						EnzymeLab.tube3.setTemperature(37);
-					}else if(text.equalsIgnoreCase("45C")){
-						EnzymeLab.tube3.setTemperature(45);
-					}else if(text.equalsIgnoreCase("59C")){
-						EnzymeLab.tube3.setTemperature(59);
+					}else if(text.equalsIgnoreCase("46C")){
+						EnzymeLab.tube3.setTemperature(46);
+					}else if(text.equalsIgnoreCase("58C")){
+						EnzymeLab.tube3.setTemperature(58);
 					}
 				}
 			}
@@ -246,10 +246,10 @@ public class EnzymeFrame extends JFrame {
 						EnzymeLab.tube4.setTemperature(29);
 					}else if(text.equalsIgnoreCase("37C")){
 						EnzymeLab.tube4.setTemperature(37);
-					}else if(text.equalsIgnoreCase("45C")){
-						EnzymeLab.tube4.setTemperature(45);
-					}else if(text.equalsIgnoreCase("59C")){
-						EnzymeLab.tube4.setTemperature(59);
+					}else if(text.equalsIgnoreCase("46C")){
+						EnzymeLab.tube4.setTemperature(46);
+					}else if(text.equalsIgnoreCase("58C")){
+						EnzymeLab.tube4.setTemperature(58);
 					}
 				}
 			}
@@ -273,10 +273,10 @@ public class EnzymeFrame extends JFrame {
 						EnzymeLab.tube5.setTemperature(29);
 					}else if(text.equalsIgnoreCase("37C")){
 						EnzymeLab.tube5.setTemperature(37);
-					}else if(text.equalsIgnoreCase("45C")){
-						EnzymeLab.tube5.setTemperature(45);
-					}else if(text.equalsIgnoreCase("59C")){
-						EnzymeLab.tube5.setTemperature(59);
+					}else if(text.equalsIgnoreCase("46C")){
+						EnzymeLab.tube5.setTemperature(46);
+					}else if(text.equalsIgnoreCase("58C")){
+						EnzymeLab.tube5.setTemperature(58);
 					}
 				}
 			}
@@ -302,7 +302,7 @@ public class EnzymeFrame extends JFrame {
 				Utils.getImage("fourthSubstrate.png"), 721, 517, 4.0);
 		fifthComponent = new SubstrateComponent(this, "fifth",
 				Utils.getImage("fifthSubstrate.png"), 792, 517, 8.0);
-
+		
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
 		text.setHighlighter(null);
@@ -314,6 +314,7 @@ public class EnzymeFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 		pane = new JScrollPane(text);
 		pane.setBorder(null);
 		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -379,16 +380,16 @@ public class EnzymeFrame extends JFrame {
 		layer.add(closeButton, 2);
 		layer.add(pane, 2);
 		layer.add(calculateButton, 2);
-		layer.add(firstComponent, 1);
-		layer.add(secondComponent, 1);
-		layer.add(thirdComponent, 1);
-		layer.add(fourthComponent, 1);
-		layer.add(fifthComponent, 1);
-		layer.add(firstSel, 1);
-		layer.add(secondSel, 1);
-		layer.add(thirdSel, 1);
-		layer.add(fourthSel, 1);
-		layer.add(fifthSel, 1);
+		layer.add(firstComponent, JLayeredPane.DRAG_LAYER);
+		layer.add(secondComponent, JLayeredPane.DRAG_LAYER);
+		layer.add(thirdComponent, JLayeredPane.DRAG_LAYER);
+		layer.add(fourthComponent, JLayeredPane.DRAG_LAYER);
+		layer.add(fifthComponent, JLayeredPane.DRAG_LAYER);
+		layer.add(firstSel, 2);
+		layer.add(secondSel, 2);
+		layer.add(thirdSel, 2);
+		layer.add(fourthSel, 2);
+		layer.add(fifthSel, 2);
 		layer.add(phValue, 2);
 		layer.add(resetButton, 2);
 		layer.add(image, 20);

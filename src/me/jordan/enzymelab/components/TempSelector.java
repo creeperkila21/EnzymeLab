@@ -21,9 +21,9 @@ public class TempSelector extends JComboBox{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unchecked") //15 29 37 45 57
+	@SuppressWarnings("unchecked") //15 29 37 46 58
 	public TempSelector(int x, int y, boolean isLess){
-		super(new String[] {"15C", "29C", "37C", "45C", "57C"});
+		super(new String[] {"15C", "29C", "37C", "46C", "58C"});
 		this.setLocation(x, y);
 		this.setBorder(null);
 		
